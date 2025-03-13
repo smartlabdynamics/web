@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartLab Dynamics - Custom Electronic Solutions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    :root {
+      --primary: #2CBDB5;
+	  --temp: #FFFFFF;
+      --secondary: #333;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --accent: #D78F8F;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    a {
+      text-decoration: none;
+      color: var(--primary);
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    /* Header Styles */
+    header {
+      background-color: #669999;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 60px;
+      margin-right: 15px;
+    }
+    
+    .logo-text {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .logo-text span {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: normal;
+      opacity: 0.8;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin-left: 30px;
+    }
+    
+    .nav-links a {
+      color: white;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+    
+    .nav-links a:hover {
+      opacity: 0.8;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: var(--accent);
+      color: white;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    
+    .btn:hover {
+      background-color: #ff5252;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Hero Section */
+    .hero {
+      background-color: var(--primary);
+      padding: 80px 0;
+      color: white;
+    }
+    
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    
+    .hero-text {
+      flex: 1;
+    }
+    
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .hero-image img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* About Section */
+    .section {
+      padding: 100px 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 4px;
+      background-color: var(--primary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .section-header p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Services Section */
+    .services {
+      background-color: #f9f9f9;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .service-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .service-content {
+      padding: 25px;
+    }
+    
+    .service-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+    
+    .service-content p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    
+    .service-content ul {
+      list-style-type: none;
+      margin-left: 0;
+    }
+    
+    .service-content li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 10px;
+    }
+    
+    .service-content li::before {
+      content: '•';
+      color: var(--primary);
+      font-size: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: -5px;
+    }
+    
+    /* Features Section */
+    .features {
+      background: white;
+    }
+    
+    .features-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      align-items: center;
+    }
+    
+    .features-image {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .features-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .features-content {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .feature-item {
+      margin-bottom: 30px;
+    }
+    
+    .feature-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      color: var(--secondary);
+    }
+    
+    .feature-item h3 span {
+      background-color: var(--primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 1.2rem;
+    }
+    
+    .feature-item p {
+      color: #666;
+      padding-left: 55px;
+    }
+    
+    /* Process Section */
+    .process {
+      background-color: #f9f9f9;
+    }
+    
+    .process-grid {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    .process-grid::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: var(--primary);
+      opacity: 0.3;
+      z-index: 0;
+    }
+    
+    .process-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .step-number {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary);
+      color: white;
+      font-size: 1.8rem;
+      font-weight: bold;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+    }
+    
+    .process-step h3 {
+      margin-bottom: 15px;
+      color: var(--secondary);
+      font-size: 1.3rem;
+    }
+    
+    .process-step p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    /* Contact Section */
+    .contact {
+      background-color: white;
+    }
+    
+    .contact-container {
+      display: flex;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    
+    .contact-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .contact-info h3 {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+    
+    .contact-info p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .contact-details {
+      list-style: none;
+    }
+    
+    .contact-details li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    
+    .contact-details li i {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-right: 15px;
+      width: 30px;
+      text-align: center;
+    }
+    
+    .contact-form {
+      flex: 1;
+      min-width: 300px;
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #444;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--secondary);
+      color: white;
+      padding: 60px 0 30px;
+    }
+    
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40px;
+      height: 3px;
+      background-color: var(--primary);
+    }
+    
+    .footer-col p {
+      opacity: 0.8;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: white;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    
+    .footer-links a:hover {
+      opacity: 1;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column;
+      }
+      
+      .hero-text {
+        text-align: center;
+      }
+      
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+      
+      .process-grid::before {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .section {
+        padding: 70px 0;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <div class="logo-text">
+            SMARTLAB DYNAMICS
+            <span>INNOVATE. INTEGRATE. ELEVATE.</span>
+          </div>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Welcome to the Future of Electronics</h1>
+          <p>At SmartLab Dynamics, we specialize in designing and developing cutting-edge custom electronic solutions tailored to your unique needs. Whether you're looking to modernize existing products or create something entirely new, we are your trusted partner in innovation.</p>
+          <a href="#services" class="btn">Explore Services</a>
+        </div>
+        <div class="hero-image">
+          <img src="images/icon1.png" width="300" height="300" alt="company logo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose SmartLab Dynamics?</h2>
+        <p>We transform your ideas into reality by integrating the latest advancements in electronics technology, ensuring your products stay ahead of the curve.</p>
+      </div>
+      <div class="features-container">
+		<div class="features-content">
+			<div class="feature-item" style="display: flex; align-items: center; gap: 20px;">
+				<img src="images/icon2.png" alt="Upgrade Technology Icon" style="width: 200px; height: 200px; border-radius: 20px;">
+				<div>
+					<h3><span>1</span> Upgrade Your Technology</h3>
+					<p>We transform your ideas into reality by integrating the latest advancements in electronics, from touchscreen integration to IoT enablement and AI integration.</p>
+				</div>
+			</div>
+  
+			<div class="feature-item" style="display: flex; align-items: center; gap: 20px;">
+				<img src="images/icon3.png" alt="Future Ready Icon" style="width: 200px; height: 200px; border-radius: 20px;">
+				<div>
+					<h3><span>2</span> Future-Ready Solutions</h3>
+					<p>We don't just build for today—we design for tomorrow. Our solutions are scalable, adaptable, and built to evolve with emerging technologies.</p>
+				</div>
+			</div>
+  
+			<div class="feature-item" style="display: flex; align-items: center; gap: 20px;">
+				<img src="images/icon4.png" alt="Stay Ahead Icon" style="width: 200px; height: 200px; border-radius: 20px;">
+				<div>
+					<h3><span>3</span> Stay Ahead in the Technical Race</h3>
+					<p>In a fast-paced world, staying competitive is key. Our innovative designs and engineering expertise ensure your products lead the market.</p>
+				</div>
+			</div>
+		</div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <p>From concept to production, we offer comprehensive end-to-end customization services to bring your vision to life.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-content">
+            <h3>Product Design & Prototyping</h3>
+            <p>Turn your concept into a tangible prototype with our expert design services.</p>
+            <ul>
+              <li>Conceptual Design</li>
+              <li>Industrial Design</li>
+              <li>Minimum Viable Product</li>
+              <li>Rapid Prototyping</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-content">
+            <h3>Hardware & Software Development</h3>
+            <p>Comprehensive development services for both the physical and digital aspects of your product.</p>
+            <ul>
+              <li>Circuit Design</li>
+              <li>PCB Layout</li>
+              <li>Firmware Development</li>
+              <li>Application Development</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-content">
+            <h3>Testing & Quality Assurance</h3>
+            <p>Rigorous testing to ensure your product meets the highest standards of quality and reliability.</p>
+            <ul>
+              <li>Functional Testing</li>
+              <li>Environmental Testing</li>
+              <li>EMC Testing</li>
+              <li>Regulatory Compliance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies Section -->
+  <section class="section features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Expertise</h2>
+        <p>We specialize in integrating cutting-edge technologies into your products, making them smarter, more efficient, and future-proof.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-content">
+            <h3>IoT Integration</h3>
+            <p>Connect your devices to the Internet of Things ecosystem, enabling remote monitoring, control, and data collection.</p>
+            <ul>
+              <li>Wireless Connectivity</li>
+              <li>Cloud Integration</li>
+              <li>Remote Monitoring Systems</li>
+              <li>Data Collection & Analysis</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-content">
+            <h3>AI & Machine Learning</h3>
+            <p>Incorporate artificial intelligence into your products to enable smart automation and adaptive functionality.</p>
+            <ul>
+              <li>Predictive Analytics</li>
+              <li>Pattern Recognition</li>
+              <li>Automated Decision Making</li>
+              <li>Machine Learning Algorithms</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-content">
+            <h3>Advanced User Interfaces</h3>
+            <p>Create intuitive, user-friendly interfaces that enhance the user experience of your products.</p>
+            <ul>
+              <li>Touchscreen Integration</li>
+              <li>Voice Control</li>
+              <li>Gesture Recognition</li>
+              <li>Haptic Feedback</li>
+            </ul>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-content">
+            <h3>Firmware & Applications</h3>
+            <p>Develop robust firmware and applications that power your hardware and provide seamless user experiences.</p>
+            <ul>
+              <li>Embedded Systems</li>
+              <li>Real-time Operating Systems</li>
+              <li>Mobile Applications</li>
+              <li>Web Interfaces</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="section process" id="process">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Process</h2>
+        <p>We follow a structured approach to bring your ideas to life, ensuring quality and satisfaction at every step.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3>Research</h3>
+          <p>We begin with thorough research to understand your requirements, market trends, and technological possibilities.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3>Design</h3>
+          <p>Our designers create detailed schematics and prototypes, iterating based on your feedback.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3>Development</h3>
+          <p>We develop the hardware and software components, ensuring they work together seamlessly.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3>Testing</h3>
+          <p>Rigorous testing ensures your product meets all functional requirements and quality standards.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">5</div>
+          <h3>Production</h3>
+          <p>We oversee the manufacturing process to ensure your product is produced with precision and care.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ready to Innovate?</h2>
+        <p>Get in touch with us to discuss your project and discover how SmartLab Dynamics can bring your vision to life.</p>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <p>Have questions or need more information? Reach out to us directly or fill out the form, and we'll get back to you as soon as possible.</p>
+          <ul class="contact-details">
+            <li>
+              <i>📱</i>
+              <span>+91-9891946239</span>
+            </li>
+            <li>
+              <i>✉️</i>
+              <span>kmrr.avinash@gmail.com</span>
+            </li>
+            <li>
+              <i>🌐</i>
+              <span>www.reallygreatsite.com</span>
+            </li>
+          </ul>
+        </div>
+        <div class="contact-form">
+          <form>
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" class="form-control" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" class="form-control" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" class="form-control" placeholder="Enter subject">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" class="form-control" placeholder="Tell us about your project"></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>SmartLab Dynamics</h3>
+          <p>Engineering Tomorrow's Possibilities</p>
+          <p>We specialize in designing and developing cutting-edge custom electronic solutions tailored to your unique needs.</p>
+          <div class="social-links">
+            <a href="#"><span>FB</span></a>
+            <a href="#"><span>TW</span></a>
+            <a href="#"><span>LI</span></a>
+            <a href="#"><span>IG</span></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Our Services</h3>
+          <ul class="footer-links">
+            <li><a href="#">Product Design</a></li>
+            <li><a href="#">Hardware Development</a></li>
+            <li><a href="#">Software Development</a></li>
+            <li><a href="#">IoT Solutions</a></li>
+            <li><a href="#">AI Integration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Newsletter</h3>
+          <p>Subscribe to our newsletter to receive updates on the latest technologies and news.</p>
+          <form>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Enter your email">
+            </div>
+            <button type="submit" class="btn">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SmartLab Dynamics. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
